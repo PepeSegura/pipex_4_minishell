@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+         #
+#    By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/01 13:27:49 by psegura-          #+#    #+#              #
-#    Updated: 2023/04/03 15:15:20 by pepe             ###   ########.fr        #
+#    Updated: 2023/04/11 20:33:15 by psegura-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS =					\
 		srcs/pipex.c	\
 		srcs/utils.c	\
 		srcs/errors.c	\
+		srcs/childs.c	\
 
 OBJS = $(SRCS:.c=.o)
 

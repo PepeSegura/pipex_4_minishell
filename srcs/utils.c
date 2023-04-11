@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:45:32 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/03 15:13:10 by pepe             ###   ########.fr       */
+/*   Updated: 2023/04/11 17:46:22 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static char	*only_path(char *cmd, char **env)
 		i++;
 	}
 	ft_free_matrix(env_paths);
-	ft_print_error("command not found");
+	ft_putstr_fd(cmd, 2);
+	ft_print_error(": command not found\n");
 	return (EXIT_SUCCESS);
 }
 
