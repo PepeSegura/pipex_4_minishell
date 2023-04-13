@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:45:32 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/11 17:46:22 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/14 00:05:55 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,18 @@ void	ft_exec(char *argv, char **env)
 		ft_perror("exec");
 }
 
-void	ft_init_data(t_cosas *c, int argc, char **argv, char **env)
+pid_t	create_fork(void)
 {
-	ft_memset(c, 0, sizeof(t_cosas));
-	c->argc = argc;
-	c->argv = argv;
-	c->env = env;
-	c->prev = STDIN_FILENO;
+	pid_t	pid;
+
+	pid = fork();
+	if (pid < 0)
+		ft_perror("fork ");
+	return (pid);
+}
+
+void	create_pipe(t_cosas *c)
+{
+	if (pipe(c->pipa) < 0)
+		ft_perror("pipe ");
 }

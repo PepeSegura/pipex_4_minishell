@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 14:49:54 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/11 21:29:10 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/14 00:05:08 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ void	ft_perror(char *str);
 void	ft_print_error(char *str);
 
 /* utils.c */
+pid_t	create_fork(void);
+void	create_pipe(t_cosas *c);
 void	ft_exec(char *argv, char **env);
 int		check_path(char **env);
-void	ft_init_data(t_cosas *c, int argc, char **argv, char **env);
 
 /* childs.c */
 void	child_input(t_cosas *c);
-void	child_middle(t_cosas *c, int i);
+void	child_middle(t_cosas *c);
 void	child_output(t_cosas *c, int i);
 #endif
