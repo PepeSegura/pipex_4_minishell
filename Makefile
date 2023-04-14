@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+         #
+#    By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/01 13:27:49 by psegura-          #+#    #+#              #
-#    Updated: 2023/04/11 20:33:15 by psegura-         ###   ########.fr        #
+#    Updated: 2023/04/14 13:58:20 by pepe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME = pipex
 
 SRCS =					\
 		srcs/main.c		\
-		srcs/pipex.c	\
 		srcs/utils.c	\
-		srcs/errors.c	\
 		srcs/childs.c	\
+		srcs/exec_cmd.c	\
+		srcs/errors.c	\
 
 OBJS = $(SRCS:.c=.o)
 

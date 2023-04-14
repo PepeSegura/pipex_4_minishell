@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   childs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:32:24 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/14 00:04:28 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/14 13:50:31 by pepe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ void	child_input(t_cosas *c)
 	pid = create_fork();
 	if (pid == CHILD)
 	{
-		fd_in = open(c->argv[1], O_RDONLY);
-		if (fd_in < 0)
-			ft_perror(c->argv[1]);
+		fd_in = open_files(INPUT, 1, c);
 		close(c->pipa[RIGHT]);
 		dup2(fd_in, STDIN_FILENO);
 		dup2(c->pipa[LEFT], STDOUT_FILENO);
@@ -77,9 +75,7 @@ void	child_output(t_cosas *c, int i)
 	if (pid == CHILD)
 	{
 		close(c->pipa[LEFT]);
-		fd_out = open(c->argv[c->argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-		if (fd_out == -1)
-			ft_perror(c->argv[c->argc - 1]);
+		fd_out = open_files(TRUNC, c->argc - 1, c);
 		dup2(c->prev, STDIN_FILENO);
 		dup2(fd_out, STDOUT_FILENO);
 		close(c->prev);
