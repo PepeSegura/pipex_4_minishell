@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 14:49:54 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/15 17:20:53 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/16 01:08:39 by pepe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define APPEND	3
 # define H_DOC	4
 
+# define PROMPT	"\033[0;32m➜  \033[0;36mHere_doc \033[1;33m✗ \033[0m"
+
 typedef struct s_cosas {
 	int		pipa[2];
 	int		prev;
@@ -45,6 +47,7 @@ typedef struct s_cosas {
 	int		flag;
 	int		pos;
 	int		last_cmd;
+	int		exit_code;
 }	t_cosas;
 
 /* pipex.c */
@@ -56,6 +59,8 @@ void	here_doc(t_cosas *c, int fd);
 /* errors.c */
 void	ft_perror(char *str);
 void	ft_print_error(char *str);
+void	cmd_not_found(char *cmd, t_cosas *c);
+void	exit_failure(char *err_msg, char **to_free, int flag);
 
 /* utils.c */
 pid_t	create_fork(void);
@@ -68,6 +73,6 @@ void	child_middle(t_cosas *c, int i);
 void	child_output(t_cosas *c, int i);
 
 /* exec_cmd.c */
-void	ft_exec(char *argv, char **env);
-int		check_path(char **env);
+void	ft_exec(char *argv, char **env, t_cosas *c);
+char	*check_path(char **env, char *cmd);
 #endif

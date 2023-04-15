@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   childs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:32:24 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/15 20:49:31 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/16 00:45:26 by pepe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	child_input(t_cosas *c, int i)
 		close(c->pipa[LEFT]);
 		close(c->pipa[RIGHT]);
 		close(fd_in);
-		ft_exec(c->argv[i], c->env);
+		ft_exec(c->argv[i], c->env, c);
 	}
 	else
 	{
@@ -55,7 +55,7 @@ void	child_middle(t_cosas *c, int i)
 				dup2(c->prev, STDIN_FILENO);
 			if (i < c->argc - 2)
 				dup2(c->pipa[LEFT], STDOUT_FILENO);
-			ft_exec(c->argv[i], c->env);
+			ft_exec(c->argv[i], c->env, c);
 		}
 		else
 		{
@@ -84,6 +84,6 @@ void	child_output(t_cosas *c, int i)
 		dup2(fd_out, STDOUT_FILENO);
 		close(c->prev);
 		close(fd_out);
-		ft_exec(c->argv[i], c->env);
+		ft_exec(c->argv[i], c->env, c);
 	}
 }

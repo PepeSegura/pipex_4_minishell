@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 15:36:39 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/15 18:13:15 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/16 00:32:52 by pepe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	here_doc(t_cosas *c, int fd)
 	line = "";
 	while (1)
 	{
-		ft_putstr_fd("\033[0;32m➜  \033[0;36mHere_doc \033[1;33m✗ \033[0m", 1);
+		ft_putstr_fd(PROMPT, 1);
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 			ft_print_error("Malloc KO");

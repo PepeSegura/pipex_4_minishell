@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 13:51:17 by pepe              #+#    #+#             */
-/*   Updated: 2023/04/15 17:28:08 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/16 01:26:24 by pepe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	check_path(char **env)
+char	*check_path(char **env, char *cmd)
 {
 	int	i;
 
@@ -20,22 +20,24 @@ int	check_path(char **env)
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
-			return (i);
+			return (env[i] + 5);
 		i++;
 	}
-	ft_print_error("There is no PATH defined in the enviroment");
-	return (i);
+	ft_putstr_fd(cmd, 2);
+	ft_print_error(": No such file or directory");
+	return (0);
 }
 
-static char	*only_path(char *cmd, char **env)
+char	*only_path(char *cmd, char **env)
 {
 	int		i;
 	char	**env_paths;
 	char	*path;
 	char	*path_cmd;
+	char	*env_aux;
 
-	i = check_path(env);
-	env_paths = ft_split(env[i] + 5, ':');
+	env_aux = check_path(env, cmd);
+	env_paths = ft_split(env_aux, ':');
 	i = 0;
 	while (env_paths[i])
 	{
@@ -51,20 +53,30 @@ static char	*only_path(char *cmd, char **env)
 		i++;
 	}
 	ft_free_matrix(env_paths);
-	ft_putstr_fd(cmd, 2);
-	ft_print_error(": command not found");
 	return (EXIT_SUCCESS);
 }
 
-void	ft_exec(char *argv, char **env)
+void	ft_exec(char *argv, char **env, t_cosas *c)
 {
 	char	**cmd;
 	char	*path;
 
 	cmd = ft_split(argv, SPACE);
 	if (!cmd || !cmd[0])
-		ft_print_error("command not found");
-	path = only_path(cmd[0], env);
-	if (execve(path, cmd, env) == -1)
-		ft_perror("exec");
+	{
+		ft_putstr_fd(argv, 2);
+		ft_print_error(": command not found");
+	}
+	path = cmd[0];
+	if (cmd[0][0] != '/' && cmd[0][0] != '.')
+	{
+		path = only_path(cmd[0], env);
+		if (!path)
+		{
+			cmd_not_found(cmd[0], c);
+			exit_failure(path, cmd, 0);
+		}
+	}
+	execve(path, cmd, env);
+	exit_failure(path, cmd, 1);
 }

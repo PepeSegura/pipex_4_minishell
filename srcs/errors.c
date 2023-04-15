@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 03:33:33 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/15 16:35:20 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/16 01:28:51 by pepe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,22 @@ void	ft_print_error(char *str)
 {
 	ft_putendl_fd(str, 2);
 	exit(EXIT_FAILURE);
+}
+
+void	cmd_not_found(char *cmd, t_cosas *c)
+{
+	char	*error;
+
+	error = ft_strjoin(cmd, ": command not found\n");
+	ft_putstr_fd(error, 2);
+	free(error);
+	c->exit_code = 127;
+}
+
+void	exit_failure(char *err_msg, char **to_free, int flag)
+{
+	if (flag == 1)
+		perror(err_msg);
+	ft_free_matrix(to_free);
+	exit(flag);
 }
