@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   childs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:32:24 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/15 01:36:05 by pepe             ###   ########.fr       */
+/*   Updated: 2023/04/15 17:28:00 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	child_input(t_cosas *c)
+void	child_input(t_cosas *c, int i)
 {
 	int		fd_in;
 	pid_t	pid;
@@ -21,14 +21,17 @@ void	child_input(t_cosas *c)
 	pid = create_fork();
 	if (pid == CHILD)
 	{
-		fd_in = open_files(INPUT, 1, c);
+		if (c->flag == INPUT)
+			fd_in = open_files(INPUT, 1, c);
+		if (c->flag == H_DOC)
+			fd_in = open_files(H_DOC, 1, c);
 		close(c->pipa[RIGHT]);
 		dup2(fd_in, STDIN_FILENO);
 		dup2(c->pipa[LEFT], STDOUT_FILENO);
 		close(c->pipa[LEFT]);
 		close(c->pipa[RIGHT]);
 		close(fd_in);
-		ft_exec(c->argv[2], c->env);
+		ft_exec(c->argv[i], c->env);
 	}
 	else
 	{
@@ -37,12 +40,10 @@ void	child_input(t_cosas *c)
 	}
 }
 
-void	child_middle(t_cosas *c)
+void	child_middle(t_cosas *c, int i)
 {
-	int		i;
 	pid_t	pid;
 
-	i = 3;
 	while (i < c->argc - 2)
 	{
 		create_pipe(c);

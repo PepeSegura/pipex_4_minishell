@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:45:32 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/14 13:52:07 by pepe             ###   ########.fr       */
+/*   Updated: 2023/04/15 17:29:26 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,19 @@ int	open_files(int identifier, int pos, t_cosas *c)
 {
 	int	fd;
 
-    if (identifier == INPUT)
+	if (identifier == INPUT)
 		fd = open(c->argv[pos], O_RDONLY);
 	if (identifier == TRUNC)
 		fd = open(c->argv[pos], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (identifier == APPEND)
 		fd = open(c->argv[pos], O_WRONLY | O_CREAT | O_APPEND, 0666);
+	if (identifier == H_DOC)
+	{
+		fd = open(".here_doc", O_RDWR | O_CREAT | O_APPEND, 0666);
+		here_doc(c, fd);
+		close(fd);
+		fd = open(".here_doc", O_RDONLY);
+	}
 	if (fd < 0 || !identifier)
 		ft_perror(c->argv[pos]);
 	return (fd);

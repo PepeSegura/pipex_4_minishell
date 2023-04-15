@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+         #
+#    By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/01 13:27:49 by psegura-          #+#    #+#              #
-#    Updated: 2023/04/15 13:09:45 by pepe             ###   ########.fr        #
+#    Updated: 2023/04/15 17:20:09 by psegura-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = pipex
 SRCS =					\
 		srcs/main.c		\
 		srcs/utils.c	\
+		srcs/here_doc.c	\
 		srcs/childs.c	\
 		srcs/exec_cmd.c	\
 		srcs/errors.c	\

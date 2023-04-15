@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 13:51:17 by pepe              #+#    #+#             */
-/*   Updated: 2023/04/14 13:51:35 by pepe             ###   ########.fr       */
+/*   Updated: 2023/04/15 17:28:08 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_path(char **env)
 			return (i);
 		i++;
 	}
-	ft_print_error("There is no PATH defined in the enviroment\n");
+	ft_print_error("There is no PATH defined in the enviroment");
 	return (i);
 }
 
@@ -52,7 +52,7 @@ static char	*only_path(char *cmd, char **env)
 	}
 	ft_free_matrix(env_paths);
 	ft_putstr_fd(cmd, 2);
-	ft_print_error(": command not found\n");
+	ft_print_error(": command not found");
 	return (EXIT_SUCCESS);
 }
 
@@ -63,7 +63,7 @@ void	ft_exec(char *argv, char **env)
 
 	cmd = ft_split(argv, SPACE);
 	if (!cmd || !cmd[0])
-		ft_print_error("command not found\n");
+		ft_print_error("command not found");
 	path = only_path(cmd[0], env);
 	if (execve(path, cmd, env) == -1)
 		ft_perror("exec");

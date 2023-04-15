@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 03:33:33 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/15 16:35:20 by psegura-         ###   ########.fr       */
+/*   Created: 2023/04/15 15:36:39 by psegura-          #+#    #+#             */
+/*   Updated: 2023/04/15 17:28:44 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_perror(char *str)
+void	here_doc(t_cosas *c, int fd)
 {
-	perror(str);
-	exit(EXIT_FAILURE);
-}
+	char	*line;
+	char	*clean;
 
-void	ft_print_error(char *str)
-{
-	ft_putendl_fd(str, 2);
-	exit(EXIT_FAILURE);
+	line = "";
+	while (1)
+	{
+		line = get_next_line(STDIN_FILENO);
+		if (!line)
+			ft_print_error("Malloc KO");
+		clean = ft_strtrim(line, "\n");
+		if (ft_strcmp(clean, c->limit) != 0)
+			ft_putstr_fd(line, fd);
+		free(line);
+		if (ft_strcmp(clean, c->limit) == 0)
+		{
+			free(clean);
+			break ;
+		}
+		free(clean);
+	}
 }
