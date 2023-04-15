@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:32:24 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/15 17:28:00 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:44:57 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ void	child_output(t_cosas *c, int i)
 	if (pid == CHILD)
 	{
 		close(c->pipa[LEFT]);
-		fd_out = open_files(TRUNC, c->argc - 1, c);
+		if (c->flag == H_DOC)
+			fd_out = open_files(APPEND, c->argc - 1, c);
+		else
+			fd_out = open_files(TRUNC, c->argc - 1, c);
 		dup2(c->prev, STDIN_FILENO);
 		dup2(fd_out, STDOUT_FILENO);
 		close(c->prev);
