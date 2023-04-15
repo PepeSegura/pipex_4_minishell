@@ -6,7 +6,7 @@
 #    By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/01 13:27:49 by psegura-          #+#    #+#              #
-#    Updated: 2023/04/14 13:58:20 by pepe             ###   ########.fr        #
+#    Updated: 2023/04/15 13:08:19 by pepe             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,4 +46,10 @@ re: fclean all
 norma:
 	@echo 6966205b5b2024286e6f726d696e65747465207c206772657020274572726f7227207c207763202d6c29202d65712030205d5d3b207468656e206e6f726d696e657474653b20656c736520286e6f726d696e65747465207c206772657020274572726f7227293b206669 | xxd -r -p | zsh
 
-.PHONY: all clean fclean re norma
+commit: fclean
+	@git add .
+	@./input.sh
+	@INPUT_VAR=$$(cat input.txt) && git commit -m "$(date):  $$INPUT_VAR" && rm -f input.txt
+	@git push
+
+.PHONY: all clean fclean re norma commit
