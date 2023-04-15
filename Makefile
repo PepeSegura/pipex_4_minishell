@@ -6,7 +6,7 @@
 #    By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/01 13:27:49 by psegura-          #+#    #+#              #
-#    Updated: 2023/04/15 17:20:09 by psegura-         ###   ########.fr        #
+#    Updated: 2023/04/15 20:48:49 by psegura-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ fclean: clean
 re: fclean all
 
 norma:
-	@echo 6966205b5b2024286e6f726d696e65747465207c206772657020274572726f7227207c207763202d6c29202d65712030205d5d3b207468656e206e6f726d696e657474653b20656c736520286e6f726d696e65747465207c206772657020274572726f7227293b206669 | xxd -r -p | zsh
+	@if [[ $$(norminette | grep 'Error' | wc -l) -eq 0 ]]; then norminette; else (norminette | grep 'Error'); fi
 
 date := $(shell date +"%a %b %_d %H:%M")
 
