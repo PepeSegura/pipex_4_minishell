@@ -6,7 +6,7 @@
 /*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 14:49:54 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/16 01:08:39 by pepe             ###   ########.fr       */
+/*   Updated: 2023/04/16 16:24:49 by pepe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct s_cosas {
 	int		pos;
 	int		last_cmd;
 	int		exit_code;
+	int		last_pid;
+	int		status;
 }	t_cosas;
 
 /* pipex.c */
@@ -66,6 +68,7 @@ void	exit_failure(char *err_msg, char **to_free, int flag);
 pid_t	create_fork(void);
 void	create_pipe(t_cosas *c);
 int		open_files(int identifier, int pos, t_cosas *c);
+void	wait_child(void);
 
 /* childs.c */
 void	child_input(t_cosas *c, int i);

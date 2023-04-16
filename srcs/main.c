@@ -6,7 +6,7 @@
 /*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 21:32:40 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/16 01:28:46 by pepe             ###   ########.fr       */
+/*   Updated: 2023/04/16 16:25:32 by pepe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,17 @@ void	ft_init_data(t_cosas *c, int argc, char **argv, char **env)
 int	main(int argc, char **argv, char **env)
 {
 	t_cosas	c;
-	int		i;
-	int		status;
 
 	if (argc < 5)
 		ft_print_error("Not enough arguments!");
-	i = 0;
 	ft_init_data(&c, argc, argv, env);
 	child_input(&c, c.pos);
 	child_middle(&c, c.pos + 1);
 	child_output(&c, argc - 2);
 	close(c.pipa[LEFT]);
 	close(c.pipa[RIGHT]);
-	while (i++ < argc - 3)
-		waitpid(-1, &status, 0);
+	wait_child();
 	if (c.flag == H_DOC)
 		unlink(".here_doc");
-	return (0);
+	return (c.status);
 }

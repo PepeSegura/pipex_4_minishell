@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:45:32 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/15 17:29:26 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/16 16:47:41 by pepe             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,17 @@ int	open_files(int identifier, int pos, t_cosas *c)
 	if (fd < 0 || !identifier)
 		ft_perror(c->argv[pos]);
 	return (fd);
+}
+
+void	wait_child(void)
+{
+	int	status;
+	int	pid;
+
+	pid = 42;
+	while (1)
+		if (pid <= 0)
+			break ;
+	else
+		pid = waitpid(-1, &status, 0);
 }
