@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   childs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:32:24 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/16 00:45:26 by pepe             ###   ########.fr       */
+/*   Updated: 2023/04/17 16:32:46 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	child_input(t_cosas *c, int i)
 		if (c->flag == INPUT)
 			fd_in = open_files(INPUT, 1, c);
 		if (c->flag == H_DOC)
-			fd_in = open_files(H_DOC, 1, c);
+			fd_in = c->fd_h_doc;
 		close(c->pipa[RIGHT]);
 		dup2(fd_in, STDIN_FILENO);
 		dup2(c->pipa[LEFT], STDOUT_FILENO);
