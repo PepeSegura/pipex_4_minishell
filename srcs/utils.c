@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:45:32 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/16 16:47:41 by pepe             ###   ########.fr       */
+/*   Updated: 2023/04/17 21:26:45 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	create_pipe(t_cosas *c)
 int	open_files(int identifier, int pos, t_cosas *c)
 {
 	int	fd;
+	int	pipa[2];
 
 	if (identifier == INPUT)
 		fd = open(c->argv[pos], O_RDONLY);
@@ -40,10 +41,11 @@ int	open_files(int identifier, int pos, t_cosas *c)
 		fd = open(c->argv[pos], O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (identifier == H_DOC)
 	{
-		fd = open(".here_doc", O_RDWR | O_CREAT | O_APPEND, 0666);
-		here_doc(c, fd);
-		close(fd);
-		fd = open(".here_doc", O_RDONLY);
+		if (pipe(pipa) < 0)
+			ft_perror("pipe ");
+		here_doc(c, pipa[LEFT]);
+		close(pipa[LEFT]);
+		return (pipa[RIGHT]);
 	}
 	if (fd < 0 || !identifier)
 		ft_perror(c->argv[pos]);

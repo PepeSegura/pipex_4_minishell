@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 21:32:40 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/17 16:32:26 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/17 21:21:08 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,5 @@ int	main(int argc, char **argv, char **env)
 	close(c.pipa[LEFT]);
 	close(c.pipa[RIGHT]);
 	wait_child();
-	if (c.flag == H_DOC)
-		unlink(".here_doc");
 	return (c.status);
 }

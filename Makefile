@@ -6,7 +6,7 @@
 #    By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/01 13:27:49 by psegura-          #+#    #+#              #
-#    Updated: 2023/04/17 16:02:46 by psegura-         ###   ########.fr        #
+#    Updated: 2023/04/17 20:05:08 by psegura-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 
+bonus: $(NAME)
+
 clean:
 	@make clean -C libft
 	@rm -rf $(OBJS)
@@ -55,4 +57,4 @@ commit: fclean
 	@INPUT_VAR=$$(cat input.txt) && git commit -m "$(date):  $$INPUT_VAR" && rm -f input.txt
 	@git push
 
-.PHONY: all clean fclean re norma commit
+.PHONY: all clean fclean re norma commit bonus
