@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:45:32 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/17 21:26:45 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/17 22:48:00 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,5 @@ void	wait_child(void)
 			break ;
 	else
 		pid = waitpid(-1, &status, 0);
+	exit(WEXITSTATUS(status));
 }
