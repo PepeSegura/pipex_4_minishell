@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pepe <pepe@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 13:51:17 by pepe              #+#    #+#             */
-/*   Updated: 2023/04/16 16:38:11 by pepe             ###   ########.fr       */
+/*   Updated: 2023/04/17 14:01:11 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ void	ft_exec(char *argv, char **env, t_cosas *c)
 		ft_print_error(": command not found");
 	}
 	path = cmd[0];
-	if (cmd[0][0] != '/' && cmd[0][0] != '.')
+	if (cmd[0][0] != '/'
+		&& ft_strncmp(cmd[0], "./", 2) && ft_strncmp(cmd[0], "../", 3))
 	{
 		path = only_path(cmd[0], env);
 		if (!path)
