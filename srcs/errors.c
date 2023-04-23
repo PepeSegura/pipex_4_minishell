@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 03:33:33 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/17 16:22:38 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/20 13:57:22 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@ void	ft_print_error(char *str)
 	exit(EXIT_FAILURE);
 }
 
-void	cmd_not_found(char *cmd, t_cosas *c)
+void	cmd_not_found(char *cmd)
 {
 	char	*error;
 
 	error = ft_strjoin(cmd, ": command not found\n");
 	ft_putstr_fd(error, 2);
 	free(error);
-	c->exit_code = 127;
 }
 
 void	exit_failure(char *err_msg, char **to_free, int flag)

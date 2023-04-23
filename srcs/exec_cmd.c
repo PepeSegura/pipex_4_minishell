@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 13:51:17 by pepe              #+#    #+#             */
-/*   Updated: 2023/04/17 16:23:19 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:28:11 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ char	*check_path(char **env, char *cmd)
 		i++;
 	}
 	ft_putstr_fd(cmd, 2);
-	ft_print_error(": No such file or directory");
+	ft_putstr_fd(": No such file or directory\n", 2);
+	exit(127);
 	return (0);
 }
 
@@ -56,17 +57,34 @@ char	*only_path(char *cmd, char **env)
 	return (EXIT_SUCCESS);
 }
 
-void	ft_exec(char *argv, char **env, t_cosas *c)
+char	**select_split(char *cmd)
+{
+	char	**splitted;
+	char	*aux;
+
+	if (ft_strchr(cmd, '\''))
+		splitted = ft_split(cmd, '\'');
+	else if (ft_strchr(cmd, '\"'))
+		splitted = ft_split(cmd, '\"');
+	else
+		splitted = ft_split(cmd, SPACE);
+	if (splitted)
+	{
+		aux = splitted[0];
+		splitted[0] = ft_strtrim(aux, " \\'\"");
+		free(aux);
+	}
+	return (splitted);
+}
+
+void	ft_exec(char *argv, char **env)
 {
 	char	**cmd;
 	char	*path;
 
-	cmd = ft_split(argv, SPACE);
+	cmd = select_split(argv);
 	if (!cmd || !cmd[0])
-	{
-		ft_putstr_fd(argv, 2);
-		ft_print_error(": command not found");
-	}
+		ft_print_error("Malloc KO");
 	path = cmd[0];
 	if (cmd[0][0] != '/'
 		&& ft_strncmp(cmd[0], "./", 2) && ft_strncmp(cmd[0], "../", 3))
@@ -74,10 +92,11 @@ void	ft_exec(char *argv, char **env, t_cosas *c)
 		path = only_path(cmd[0], env);
 		if (!path)
 		{
-			cmd_not_found(cmd[0], c);
-			exit_failure(path, cmd, 0);
+			cmd_not_found(cmd[0]);
+			exit_failure(path, cmd, 127);
 		}
 	}
 	execve(path, cmd, env);
+	dprintf(2, "paco\n");
 	exit_failure(path, cmd, 1);
 }

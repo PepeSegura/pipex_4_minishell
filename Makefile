@@ -6,7 +6,7 @@
 #    By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/01 13:27:49 by psegura-          #+#    #+#              #
-#    Updated: 2023/04/17 21:33:50 by psegura-         ###   ########.fr        #
+#    Updated: 2023/04/20 01:24:43 by psegura-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS = $(SRCS:.c=.o)
 LIB = libft/libft.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I inc -I libft  #-g3 -fsanitize=address,leak
+CFLAGS = -Wall -Wextra -Werror -I inc -I libft  -g3 -fsanitize=address,leak
 
 date := $(shell date +"%a %b %_d %H:%M")
 

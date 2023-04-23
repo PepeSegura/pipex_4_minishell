@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 21:32:40 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/17 21:21:08 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/20 13:47:15 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	ft_init_data(t_cosas *c, int argc, char **argv, char **env)
 	c->pos = 2;
 	if (ft_strcmp(argv[1], "here_doc") == 0)
 	{
+		if (argc < 6)
+			ft_print_error("Not enough arguments!");
 		c->limit = argv[2];
 		c->flag = H_DOC;
 		c->pos = 3;
 		c->fd_h_doc = open_files(H_DOC, 1, c);
-		if (argc < 6)
-			ft_print_error("Not enough arguments!");
 	}
 }
 
@@ -44,6 +44,6 @@ int	main(int argc, char **argv, char **env)
 	child_output(&c, argc - 2);
 	close(c.pipa[LEFT]);
 	close(c.pipa[RIGHT]);
-	wait_child();
+	wait_child(&c);
 	return (c.status);
 }

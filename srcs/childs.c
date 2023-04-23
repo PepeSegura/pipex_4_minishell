@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:32:24 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/17 21:26:55 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:05:41 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	child_input(t_cosas *c, int i)
 	pid_t	pid;
 
 	create_pipe(c);
-	pid = create_fork();
+	pid = create_fork(c);
 	if (pid == CHILD)
 	{
 		if (c->flag == INPUT)
@@ -31,7 +31,7 @@ void	child_input(t_cosas *c, int i)
 		close(c->pipa[LEFT]);
 		close(c->pipa[RIGHT]);
 		close(fd_in);
-		ft_exec(c->argv[i], c->env, c);
+		ft_exec(c->argv[i], c->env);
 	}
 	else
 	{
@@ -47,7 +47,7 @@ void	child_middle(t_cosas *c, int i)
 	while (i < c->argc - 2)
 	{
 		create_pipe(c);
-		pid = create_fork();
+		pid = create_fork(c);
 		if (pid == CHILD)
 		{
 			close(c->pipa[RIGHT]);
@@ -55,7 +55,7 @@ void	child_middle(t_cosas *c, int i)
 				dup2(c->prev, STDIN_FILENO);
 			if (i < c->argc - 2)
 				dup2(c->pipa[LEFT], STDOUT_FILENO);
-			ft_exec(c->argv[i], c->env, c);
+			ft_exec(c->argv[i], c->env);
 		}
 		else
 		{
@@ -72,7 +72,7 @@ void	child_output(t_cosas *c, int i)
 	int		fd_out;
 	pid_t	pid;
 
-	pid = create_fork();
+	pid = create_fork(c);
 	if (pid == CHILD)
 	{
 		close(c->pipa[LEFT]);
@@ -84,6 +84,6 @@ void	child_output(t_cosas *c, int i)
 		dup2(fd_out, STDOUT_FILENO);
 		close(c->prev);
 		close(fd_out);
-		ft_exec(c->argv[i], c->env, c);
+		ft_exec(c->argv[i], c->env);
 	}
 }

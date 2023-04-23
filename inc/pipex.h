@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 14:49:54 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/17 19:59:44 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:05:09 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ void	here_doc(t_cosas *c, int fd);
 /* errors.c */
 void	ft_perror(char *str);
 void	ft_print_error(char *str);
-void	cmd_not_found(char *cmd, t_cosas *c);
+void	cmd_not_found(char *cmd);
 void	exit_failure(char *err_msg, char **to_free, int flag);
 
 /* utils.c */
-pid_t	create_fork(void);
+pid_t	create_fork(t_cosas *c);
 void	create_pipe(t_cosas *c);
 int		open_files(int identifier, int pos, t_cosas *c);
-void	wait_child(void);
+void	wait_child(t_cosas *c);
 
 /* childs.c */
 void	child_input(t_cosas *c, int i);
@@ -76,6 +76,6 @@ void	child_middle(t_cosas *c, int i);
 void	child_output(t_cosas *c, int i);
 
 /* exec_cmd.c */
-void	ft_exec(char *argv, char **env, t_cosas *c);
+void	ft_exec(char *argv, char **env);
 char	*check_path(char **env, char *cmd);
 #endif

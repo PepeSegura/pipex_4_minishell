@@ -6,19 +6,20 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 15:45:32 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/17 22:48:00 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/20 14:03:48 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-pid_t	create_fork(void)
+pid_t	create_fork(t_cosas *c)
 {
 	pid_t	pid;
 
 	pid = fork();
 	if (pid < 0)
 		ft_perror("fork ");
+	c->last_pid = pid;
 	return (pid);
 }
 
@@ -52,16 +53,21 @@ int	open_files(int identifier, int pos, t_cosas *c)
 	return (fd);
 }
 
-void	wait_child(void)
+void	wait_child(t_cosas *c)
 {
 	int	status;
 	int	pid;
 
-	pid = 42;
 	while (1)
+	{
+		pid = waitpid(-1, &status, 0);
 		if (pid <= 0)
 			break ;
-	else
-		pid = waitpid(-1, &status, 0);
-	exit(WEXITSTATUS(status));
+		if (pid == c->last_pid)
+		{
+			if (WEXITSTATUS(status))
+				c->status = WEXITSTATUS(status);
+		}
+	}		
+	exit(c->status);
 }
