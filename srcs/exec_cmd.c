@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 13:51:17 by pepe              #+#    #+#             */
-/*   Updated: 2023/04/20 14:28:11 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/23 14:19:32 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,5 @@ void	ft_exec(char *argv, char **env)
 		}
 	}
 	execve(path, cmd, env);
-	dprintf(2, "paco\n");
 	exit_failure(path, cmd, 1);
 }

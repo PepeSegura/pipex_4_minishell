@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/19 14:49:54 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/20 14:05:09 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/23 12:41:59 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ typedef struct s_cosas {
 	char	*limit;
 	int		flag;
 	int		pos;
-	int		exit_code;
-	int		last_pid;
+	pid_t	last_pid;
 	int		status;
 	int		fd_h_doc;
 }	t_cosas;
