@@ -6,7 +6,7 @@
 /*   By: psegura- <psegura-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 17:32:24 by psegura-          #+#    #+#             */
-/*   Updated: 2023/04/20 14:05:41 by psegura-         ###   ########.fr       */
+/*   Updated: 2023/04/23 16:18:00 by psegura-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	child_input(t_cosas *c, int i)
 		dup2(fd_in, STDIN_FILENO);
 		dup2(c->pipa[LEFT], STDOUT_FILENO);
 		close(c->pipa[LEFT]);
-		close(c->pipa[RIGHT]);
 		close(fd_in);
 		ft_exec(c->argv[i], c->env);
 	}
